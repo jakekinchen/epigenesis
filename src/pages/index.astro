@@ -1,0 +1,12 @@
+---
+import Banner from '../components/react/Banner';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Jake Kinchen - Software Engineer" hideFooter={true}>
+  <div class="fixed inset-0 overflow-hidden">
+    <main class="w-full h-full font-bodyFont text-textLight">
+      <Banner client:only="react" />
+    </main>
+  </div>
+</Layout>

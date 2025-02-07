@@ -1,0 +1,104 @@
+---
+title: 'Interactive Particle System'
+date: '2024-03-15'
+description: "A dynamic particle system that responds to mouse movement and creates beautiful patterns."
+tags: ['Canvas', 'Animation', 'Interactive']
+preview: true
+---
+
+```javascript
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 5 + 1;
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    
+    if (this.size > 0.2) this.size -= 0.1;
+  }
+
+  draw(ctx) {
+    ctx.fillStyle = 'rgba(100, 255, 218, 0.8)';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+class ParticleSystem {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.mouse = {
+      x: null,
+      y: null,
+      radius: 100
+    };
+
+    // Handle mouse movement
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      this.mouse.x = e.clientX - rect.left;
+      this.mouse.y = e.clientY - rect.top;
+    });
+
+    // Handle mouse leave
+    canvas.addEventListener('mouseleave', () => {
+      this.mouse.x = null;
+      this.mouse.y = null;
+    });
+
+    // Handle resize
+    new ResizeObserver(entries => {
+      for (const entry of entries) {
+        this.canvas.width = entry.contentRect.width;
+        this.canvas.height = entry.contentRect.height;
+      }
+    }).observe(canvas.parentElement);
+  }
+
+  init() {
+    // Initial particles
+    const numParticles = Math.min(100, (this.canvas.width * this.canvas.height) / 10000);
+    for (let i = 0; i < numParticles; i++) {
+      const x = Math.random() * this.canvas.width;
+      const y = Math.random() * this.canvas.height;
+      this.particles.push(new Particle(x, y));
+    }
+  }
+
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    for (let i = 0; i < this.particles.length; i++) {
+      this.particles[i].update();
+      this.particles[i].draw(this.ctx);
+      
+      // Replace particles that are too small
+      if (this.particles[i].size <= 0.2) {
+        this.particles.splice(i, 1);
+        i--;
+        
+        // Create new particle at mouse position or random position
+        const x = this.mouse.x ?? Math.random() * this.canvas.width;
+        const y = this.mouse.y ?? Math.random() * this.canvas.height;
+        this.particles.push(new Particle(x, y));
+      }
+    }
+    requestAnimationFrame(this.animate.bind(this));
+  }
+}
+
+// Initialize the system
+const canvas = document.getElementById('particleCanvas');
+const system = new ParticleSystem(canvas);
+system.init();
+system.animate();
+``` 

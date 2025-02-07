@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<Layout title="Projects - Jake Kinchen" hideFooter={true}>
+  <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <h1 class="text-5xl font-bold text-white">Projects</h1>
+        <p class="text-lg text-slate-300">A collection of my notable projects and contributions.</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+        <div class="bg-slate-800/30 p-6 rounded-lg hover:bg-slate-800/40 transition-colors">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl text-slate-200">CyberNews AI Journalist</h3>
+            <a href="https://github.com/jakekinchen/CyberNewsAIJournalist" 
+               class="text-sky-400 hover:text-sky-300 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+              <Icon name="logos:github-icon" class="h-6 w-6" />
+            </a>
+          </div>
+          <p class="text-slate-300">
+            A cutting-edge tool designed to work with LLM's to fetch, aggregate, and provide insightful analyses of cybersecurity news. Features include WordPress integration, automated image generation with DALL-E 3, and custom data scraping capabilities. The tool synthesizes cybersecurity information from various sources into a single, cohesive interface.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">LLM Integration</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">WordPress</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">DALL-E 3</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Data Scraping</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/30 p-6 rounded-lg hover:bg-slate-800/40 transition-colors">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl text-slate-200">OneTier Website</h3>
+            <a href="https://www.onetier.com" 
+               class="text-sky-400 hover:text-sky-300 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+              <Icon name="mdi:link-variant" class="h-6 w-6" />
+            </a>
+          </div>
+          <p class="text-slate-300">
+            A high-performance, static website built using Astro for a cybersecurity company. The site showcases modern aesthetics and cutting-edge performance through Astro's static site generation capabilities, optimized load times, and seamless user interactions.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Astro</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Static Site Generation</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Performance Optimization</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/30 p-6 rounded-lg hover:bg-slate-800/40 transition-colors">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl text-slate-200">TrailMates</h3>
+            <a href="https://github.com/jakekinchen/TrailMates" 
+               class="text-sky-400 hover:text-sky-300 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+              <Icon name="logos:github-icon" class="h-6 w-6" />
+            </a>
+          </div>
+          <p class="text-slate-300">
+            An iOS application facilitating spontaneous social meetups along the Ann and Roy Butler Trail in Austin, Texas. TrailMates helps connect users with exercise companions or quick hangouts in real-time along the trail.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">iOS Development</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Swift</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Real-time</span>
+            <span class="text-xs px-2 py-1 bg-slate-700/50 rounded text-sky-400">Social Networking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout> 

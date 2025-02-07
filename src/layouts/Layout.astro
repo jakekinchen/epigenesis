@@ -1,0 +1,72 @@
+---
+import Header from '../components/header.astro';
+import Footer from '../components/footer.astro';
+import StarBackground from '../components/react/StarBackground';
+import '@fontsource/poppins';
+import '@fontsource-variable/jetbrains-mono';
+
+interface Props {
+  title: string;
+  hideFooter?: boolean;
+}
+
+const { title, hideFooter = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Jake Kinchen - Software Engineer Portfolio" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <StarBackground client:only="react" />
+    <div id="layout-container" class="relative min-h-screen flex flex-col text-slate-400">
+      <Header />
+      <main class="flex-auto">
+        <slot />
+      </main>
+      {!hideFooter && <Footer />}
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  
+  html {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: #171717;
+    color-scheme: dark;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+  }
+  
+  code {
+    font-family: 'JetBrains Mono Variable', monospace;
+  }
+</style> 

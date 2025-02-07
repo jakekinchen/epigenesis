@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+
+// Generate static paths for all blog posts
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ id }) => {
+    return id.startsWith('en/');
+  });
+  
+  return posts.map(post => ({
+    params: { slug: post.slug.replace('en/', '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - Jake Kinchen`} hideFooter={true}>
+  <article class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      {post.data.cover && (
+        <img 
+          src={typeof post.data.cover === 'string' ? post.data.cover : post.data.cover.src}
+          alt={post.data.title}
+          class="w-full h-64 object-cover rounded-lg"
+        />
+      )}
+      
+      <div class="space-y-4">
+        <h1 class="text-4xl font-bold text-white">{post.data.title}</h1>
+        
+        <div class="flex items-center space-x-4 text-sm text-slate-400">
+          <time datetime={post.data.date}>{post.data.date}</time>
+          {post.data.tags && (
+            <div class="flex items-center space-x-2">
+              <span>•</span>
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => (
+                  <span class="px-2 py-1 bg-slate-700/50 rounded text-xs text-sky-400">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div class="prose prose-invert max-w-none">
+        <Content />
+      </div>
+
+      <div class="border-t border-slate-800 pt-8">
+        <a 
+          href="/blog" 
+          class="inline-flex items-center text-sky-400 hover:text-sky-300 transition-colors"
+        >
+          <Icon name="mdi:arrow-left" class="h-5 w-5 mr-2" />
+          Back to Blog
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout> 

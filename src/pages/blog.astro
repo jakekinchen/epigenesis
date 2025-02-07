@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+
+// Get all blog posts
+const posts = await getCollection('blog', ({ id }) => {
+  return id.startsWith('en/'); // Only get English posts for now
+});
+
+// Sort posts by date
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+---
+
+<Layout title="Blog - Jake Kinchen" hideFooter={true}>
+  <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-12">
+      <div class="space-y-4">
+        <h1 class="text-5xl font-bold text-white">Blog</h1>
+        <p class="text-lg text-slate-300">Thoughts, ideas, and explorations.</p>
+      </div>
+
+      <div class="space-y-8">
+        {sortedPosts.map((post) => (
+          <article class="bg-slate-800/30 p-6 rounded-lg hover:bg-slate-800/40 transition-colors">
+            <div class="space-y-4">
+              {post.data.cover && (
+                <img 
+                  src={typeof post.data.cover === 'string' ? post.data.cover : post.data.cover.src} 
+                  alt={post.data.title}
+                  class="w-full h-48 object-cover rounded-md"
+                />
+              )}
+              <div class="space-y-2">
+                <h2 class="text-2xl font-semibold text-slate-200">
+                  <a href={`/blog/${post.slug}`} class="hover:text-sky-400 transition-colors">
+                    {post.data.title}
+                  </a>
+                </h2>
+                <div class="flex items-center space-x-4 text-sm text-slate-400">
+                  <time datetime={post.data.date}>{post.data.date}</time>
+                  {post.data.tags && (
+                    <div class="flex items-center space-x-2">
+                      <span>•</span>
+                      <div class="flex flex-wrap gap-2">
+                        {post.data.tags.map((tag: string) => (
+                          <span class="px-2 py-1 bg-slate-700/50 rounded text-xs text-sky-400">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <p class="text-slate-300">
+                  {post.data.description}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout> 

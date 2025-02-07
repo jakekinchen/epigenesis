@@ -1,0 +1,107 @@
+---
+title: 'OneTier Website'
+date: '2024-01-20'
+description: "A high-performance, static website built using Astro for a cybersecurity company. The site showcases modern aesthetics and cutting-edge performance through Astro's static site generation capabilities, optimized load times, and seamless user interactions."
+tags: [
+  'Astro',
+  'Static Site Generation',
+  'Performance Optimization',
+  'TypeScript',
+  'TailwindCSS',
+  'React',
+  'SEO'
+]
+cover: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?q=80&w=2370&auto=format&fit=crop'
+link: 'https://www.onetier.com'
+---
+
+## Overview
+
+The OneTier Website project represents a modern approach to corporate web presence, built with Astro to deliver exceptional performance and user experience. This static site combines cutting-edge web technologies with elegant design to create a professional platform for a leading cybersecurity company.
+
+## Key Features
+
+### Performance Optimization
+- Sub-second page loads through static site generation
+- Optimized asset delivery and caching strategies
+- Perfect Lighthouse scores across all metrics
+- Responsive images with automatic optimization
+
+### Modern Design
+- Clean, professional aesthetic
+- Responsive layouts for all devices
+- Smooth animations and transitions
+- Dark mode support
+- Accessibility-first approach
+
+### Technical Excellence
+```typescript
+// Example of optimized image component
+interface ImageProps {
+  src: string;
+  alt: string;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const OptimizedImage: React.FC<ImageProps> = ({
+  src,
+  alt,
+  sizes = '100vw',
+  loading = 'lazy'
+}) => {
+  return (
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={generateSrcSet(src, 'webp')}
+        sizes={sizes}
+      />
+      <img
+        src={src}
+        alt={alt}
+        loading={loading}
+        decoding="async"
+        className="w-full h-auto"
+      />
+    </picture>
+  );
+};
+```
+
+### Content Management
+- Markdown-based content system
+- Automated SEO optimization
+- Dynamic sitemap generation
+- Structured data implementation
+
+## Technical Implementation
+
+The website leverages several modern web technologies:
+
+- **Astro** for static site generation
+- **React** for interactive components
+- **TypeScript** for type safety
+- **TailwindCSS** for styling
+- **MDX** for rich content
+- **Cloudflare** for edge deployment
+
+## Performance Metrics
+
+The website achieves exceptional performance scores:
+
+- 100/100 Performance (Lighthouse)
+- 100/100 Accessibility
+- 100/100 Best Practices
+- 100/100 SEO
+- < 0.5s First Contentful Paint
+- < 1s Time to Interactive
+
+## Future Enhancements
+
+Planned improvements include:
+- Internationalization support
+- Enhanced animation system
+- Blog section with technical articles
+- Interactive product demos
+- Advanced search functionality 

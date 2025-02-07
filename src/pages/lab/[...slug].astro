@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import ParticleDemo from '../../components/react/ParticleDemo';
+
+export async function getStaticPaths() {
+  const labItems = await getCollection('lab', ({ id }) => {
+    return id.startsWith('en/');
+  });
+  
+  return labItems.map(item => ({
+    params: { slug: item.slug.replace('en/', '') },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await item.render();
+---
+
+<Layout title={`${item.data.title} - Lab - Jake Kinchen`} hideFooter={true}>
+  <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <a 
+          href="/lab" 
+          class="inline-flex items-center text-sky-400 hover:text-sky-300 transition-colors"
+        >
+          <Icon name="mdi:arrow-left" class="h-5 w-5 mr-2" />
+          Back to Lab
+        </a>
+        <h1 class="text-4xl font-bold text-white">{item.data.title}</h1>
+        <div class="flex flex-wrap gap-2">
+          {item.data.tags.map((tag: string) => (
+            <span class="px-2 py-1 bg-slate-700/50 rounded text-xs text-sky-400">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <p class="text-lg text-slate-300">{item.data.description}</p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-2">
+        {/* Interactive Demo */}
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-200">Demo</h2>
+          <ParticleDemo client:load />
+        </div>
+
+        {/* Code */}
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-200">Code</h2>
+          <div class="prose prose-invert max-w-none">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .prose pre {
+    background-color: rgba(30, 41, 59, 0.3) !important;
+    padding: 1.5rem !important;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .prose code {
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0;
+    color: #94a3b8 !important;
+  }
+</style> 
