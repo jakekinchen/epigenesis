@@ -2,17 +2,19 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
-import ParticleDemo from '../../components/react/ParticleDemo';
+import { LabScene } from '../../components/lab/LabScene';
 
 export async function getStaticPaths() {
-  const labItems = await getCollection('lab', ({ id }) => {
-    return id.startsWith('en/');
-  });
+  const labItems = await getCollection('lab');
   
-  return labItems.map(item => ({
-    params: { slug: item.slug.replace('en/', '') },
-    props: { item },
-  }));
+  return labItems.map(item => {
+    // Remove the 'en' prefix from the slug
+    const slug = item.slug.split('/').pop() || item.slug;
+    return {
+      params: { slug },
+      props: { item },
+    };
+  });
 }
 
 const { item } = Astro.props;
@@ -45,7 +47,7 @@ const { Content } = await item.render();
         {/* Interactive Demo */}
         <div class="space-y-4">
           <h2 class="text-2xl font-semibold text-slate-200">Demo</h2>
-          <ParticleDemo client:load />
+          <LabScene client:load />
         </div>
 
         {/* Code */}

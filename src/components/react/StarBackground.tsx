@@ -27,12 +27,14 @@ const StarBackground: React.FC = () => {
       opacity: 0.8,
     });
 
-    const starVertices = [];
+    const starVertices: number[] = [];
     for (let i = 0; i < 15000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
       const z = (Math.random() - 0.5) * 2000;
-      starVertices.push(x, y, z);
+      starVertices.push(x);
+      starVertices.push(y);
+      starVertices.push(z);
     }
 
     starGeometry.setAttribute(

@@ -4,14 +4,15 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 
 // Get all lab items
-const labItems = await getCollection('lab', ({ id }) => {
-  return id.startsWith('en/');
-});
+const labItems = await getCollection('lab');
 
 // Sort by date
 const sortedItems = labItems.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
+
+// Function to get clean slug without 'en' prefix
+const getCleanSlug = (slug: string) => slug.split('/').pop() || slug;
 ---
 
 <Layout title="Lab - Jake Kinchen" hideFooter={true}>
@@ -25,7 +26,7 @@ const sortedItems = labItems.sort(
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {sortedItems.map((item) => (
           <a 
-            href={`/lab/${item.slug.replace('en/', '')}`}
+            href={`/lab/${getCleanSlug(item.slug)}`}
             class="group bg-slate-800/30 p-6 rounded-lg hover:bg-slate-800/40 transition-colors"
           >
             <article class="space-y-4">

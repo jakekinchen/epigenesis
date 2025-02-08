@@ -3,17 +3,41 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "esModuleInterop": true,
-    "verbatimModuleSyntax": false,
+    "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["src/*"],
+      "three/examples/jsm/*": ["node_modules/three/examples/jsm/*"]
+    },
+    "types": [
+      "astro/client",
+      "react",
+      "react-dom",
+      "@react-three/fiber",
+      "@react-three/drei",
+      "@types/node"
+    ],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "ignoreDeprecations": "5.0",
+    "jsx": "preserve",
+    "jsxFactory": "astro",
+    "jsxFragmentFactory": "astro",
+    "noEmit": true,
+    "isolatedModules": true
   },
   "include": [
-    "src"
+    "src/**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "node_modules"
   ]
 }

@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<Layout title="Contact - Jake Kinchen" hideFooter={true}>
+  <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="space-y-12">
+      <div class="space-y-4">
+        <h1 class="text-5xl font-bold text-white">Contact</h1>
+        <p class="text-lg text-slate-300">Get in touch with me.</p>
+      </div>
+
+      <div class="bg-slate-800/30 rounded-lg p-8">
+        <form class="space-y-6" action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="space-y-4">
+            <label for="name" class="block text-sm font-medium text-slate-200">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              class="block w-full rounded-md bg-slate-700/50 border-slate-600 text-slate-200 focus:border-sky-500 focus:ring-sky-500"
+            />
+          </div>
+
+          <div class="space-y-4">
+            <label for="email" class="block text-sm font-medium text-slate-200">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              class="block w-full rounded-md bg-slate-700/50 border-slate-600 text-slate-200 focus:border-sky-500 focus:ring-sky-500"
+            />
+          </div>
+
+          <div class="space-y-4">
+            <label for="message" class="block text-sm font-medium text-slate-200">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              rows="6"
+              required
+              class="block w-full rounded-md bg-slate-700/50 border-slate-600 text-slate-200 focus:border-sky-500 focus:ring-sky-500"
+            ></textarea>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors"
+            >
+              Send Message
+              <Icon name="mdi:send" class="ml-2 -mr-1 h-5 w-5" />
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <div class="bg-slate-800/30 rounded-lg p-6">
+          <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-slate-200">Email</h2>
+            <a href="mailto:your.email@example.com" class="text-sky-400 hover:text-sky-300 transition-colors">
+              your.email@example.com
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/30 rounded-lg p-6">
+          <div class="space-y-4">
+            <h2 class="text-xl font-semibold text-slate-200">Social</h2>
+            <div class="flex space-x-4">
+              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 transition-colors">
+                <Icon name="mdi:github" class="h-6 w-6" />
+              </a>
+              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 transition-colors">
+                <Icon name="mdi:linkedin" class="h-6 w-6" />
+              </a>
+              <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 transition-colors">
+                <Icon name="mdi:twitter" class="h-6 w-6" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout> 

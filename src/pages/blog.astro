@@ -4,9 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
 
 // Get all blog posts
-const posts = await getCollection('blog', ({ id }) => {
-  return id.startsWith('en/'); // Only get English posts for now
-});
+const posts = await getCollection('blog');
 
 // Sort posts by date
 const sortedPosts = posts.sort(

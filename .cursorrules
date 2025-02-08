@@ -1,0 +1,8 @@
+# This file contains rules for Cursor to run after edits
+# Run astro dev to check for build errors after changes
+
+[after_edit]
+command = "astro dev"
+timeout = 30  # Timeout in seconds
+success_pattern = "astro.*ready"
+error_pattern = "\\[ERROR\\].*" 

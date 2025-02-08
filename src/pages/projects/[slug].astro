@@ -12,7 +12,7 @@ type Projects = CollectionEntry<CollectionType.Projects>;
 export async function getStaticPaths() {
   const projects = await getCollection(CollectionType.Projects);
   return projects.map((project) => {
-    const slug = project.slug;
+    const slug = project.slug.split('/').pop() || project.slug;
     return {
       params: { slug },
       props: { project },

@@ -7,7 +7,7 @@ import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import icon from "astro-icon";
-import { SITE_URL,LANGUAGES } from "./src/config";
+import { SITE_URL } from "./src/config/index.js";
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
@@ -16,9 +16,15 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: "viewport",
   },
-  i18n: {
-    locales: LANGUAGES,
-    defaultLocale: "en",
+  vite: {
+    build: {
+      target: 'esnext'
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'esnext'
+      }
+    }
   },
   integrations: [
     mdx({

@@ -19,7 +19,7 @@ export const MENUS = [
   },
   {
     title: "Posts",
-    link: "/en/posts",
+    link: "/posts",
     target: "_self",
   },
   {

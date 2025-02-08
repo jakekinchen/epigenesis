@@ -5,14 +5,15 @@ import { Icon } from 'astro-icon/components';
 
 // Generate static paths for all blog posts
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ id }) => {
-    return id.startsWith('en/');
-  });
+  const posts = await getCollection('blog');
   
-  return posts.map(post => ({
-    params: { slug: post.slug.replace('en/', '') },
-    props: { post },
-  }));
+  return posts.map(post => {
+    const slug = post.slug.split('/')[1]; // Get the part after 'en/'
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
 }
 
 const { post } = Astro.props;

@@ -8,6 +8,8 @@ import '@fontsource-variable/jetbrains-mono';
 interface Props {
   title: string;
   hideFooter?: boolean;
+  description?: string;
+  children?: any;
 }
 
 const { title, hideFooter = false } = Astro.props;
@@ -22,6 +24,14 @@ const { title, hideFooter = false } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/three.module.js",
+          "three/examples/jsm/": "/jsm/"
+        }
+      }
+    </script>
   </head>
   <body>
     <StarBackground client:only="react" />
